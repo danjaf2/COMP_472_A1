@@ -56,9 +56,9 @@ df = DataFrame(Data,columns=['Post','Emotions', 'Sentiments'])
 plt.rcParams.update({'font.size': 3})
 
 plt.hist(emotions, bins=28, alpha=0.5)
-plt.title('Random Gaussian data (fixed number of bins)')
-plt.xlabel('variable X (20 evenly spaced bins)')
-plt.ylabel('count')
+plt.title('Emotions')
+plt.xlabel('X')
+plt.ylabel('Y')
 
 plt.show()
 
