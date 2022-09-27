@@ -30,10 +30,7 @@ for i in range(length):
     posts[i]=fullData[i][0]
     sentiments[i]= fullData[i][2]
 
-vectorizer = CountVectorizer()
-posts_matrix = vectorizer.fit_transform(posts)
-Data = {'Post': posts,'Emotions':emotions, 'Sentiments': sentiments}
-df = DataFrame(Data,columns=['Post','Emotions', 'Sentiments'])
+
 # distribution= [sentiments.count('positive')/length*100, sentiments.count('neutral')/length*100, sentiments.count('neutral')/length*100, sentiments.count('ambiguous')/length*100]
 # labels = 'Positive', 'Neutral', 'Negative', 'Ambiguous'
 # explode = (0, 0.1, 0,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
@@ -51,13 +48,27 @@ df = DataFrame(Data,columns=['Post','Emotions', 'Sentiments'])
 # plt.ylabel('Y')
 #
 # plt.show()
-
+vectorizer = CountVectorizer()
+from sklearn import preprocessing
+le = preprocessing.LabelEncoder()
+sentiments_encoded= le.fit_transform(sentiments)
+posts_encoded = vectorizer.fit_transform(posts)
 print("The length of the vocabulary is "+str(len(vectorizer.vocabulary_)) )
 
+Data = {'Post': posts,'Emotions':emotions, 'Sentiments': sentiments}
+df = DataFrame(Data,columns=['Post','Emotions', 'Sentiments'])
 
-training_data, testing_data = train_test_split(df, test_size=0.2, shuffle=False)
+classifier = MultinomialNB(class_prior=[0.293, 0.293, 0.313, 0.101])
+model= classifier.fit(posts_encoded, sentiments_encoded)
+topredict =vectorizer.transform(['Man I love reddit.'])
+prediction= model.predict(topredict)
+print(prediction)
 
-print(training_data['Post'][1])
+for i in range (50):
+    print(posts[i])
+    print(sentiments_encoded[i])
+    print('\n')
+
 
 
 
