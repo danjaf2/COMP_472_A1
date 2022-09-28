@@ -1,5 +1,7 @@
 import json
 import gzip
+
+import nltk
 from pandas import DataFrame
 import numpy as np
 from sklearn.naive_bayes import MultinomialNB
@@ -13,6 +15,8 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import math
 from collections import Counter
+from sklearn.feature_extraction.text import TfidfVectorizer
+from nltk.corpus import stopwords
 
 
 
@@ -53,16 +57,21 @@ for i in range(length):
 # plt.show()
 
 #Basic Naive Bayes
+
 print('--------------BASIC NAIVE BAYES SENTIMENTS------------------------')
-vectorizerBS = CountVectorizer()
-leBS = preprocessing.LabelEncoder()
-sentiments_encoded= leBS.fit_transform(sentiments)
-posts_encoded = vectorizerBS.fit_transform(posts)
-print("The length of the vocabulary is "+str(len(vectorizerBS.vocabulary_)) )
-X_trainBS, X_testBS, y_trainBS, y_testBS=train_test_split(posts_encoded,sentiments_encoded, stratify=sentiments_encoded, test_size=0.2, random_state=0)
-classifierBS = MultinomialNB()
-modelBS= classifierBS.fit(X_trainBS, y_trainBS)
-print("The accuracy of the basic Bayes model for sentiments is " + str(accuracy_score(classifierBS.predict(X_testBS),y_testBS)*100))
+vectorizer = CountVectorizer()
+le = preprocessing.LabelEncoder()
+sentiments_enconded= le.fit_transform(sentiments)
+posts_encoded = vectorizer.fit_transform(posts)
+print("The length of the vocabulary is "+str(len(vectorizer.vocabulary_)) )
+X_train, X_test, y_train, y_test=train_test_split(posts_encoded,sentiments_enconded, stratify=sentiments_enconded, test_size=0.2, random_state=0)
+classifier= MultinomialNB()
+modelBE= classifier.fit(X_train, y_train)
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+predictions = classifier.predict(X_test)
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test,predictions))
+print(accuracy_score(y_test, predictions))
 print('------------------------------------------------------------------')
 
 
