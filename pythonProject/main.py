@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 import matplotlib
 from sklearn import preprocessing
+from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_auc_score
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -61,21 +62,9 @@ print("The length of the vocabulary is "+str(len(vectorizerBS.vocabulary_)) )
 X_trainBS, X_testBS, y_trainBS, y_testBS=train_test_split(posts_encoded,sentiments_encoded, stratify=sentiments_encoded, test_size=0.2, random_state=0)
 classifierBS = MultinomialNB()
 modelBS= classifierBS.fit(X_trainBS, y_trainBS)
-from sklearn.metrics import accuracy_score
-print("The accuracy of the basic Bayes model for sentiments is " + str(accuracy_score(classifierBS.predict(X_testBS),y_testBS)))
+print("The accuracy of the basic Bayes model for sentiments is " + str(accuracy_score(classifierBS.predict(X_testBS),y_testBS)*100))
 print('------------------------------------------------------------------')
-print('--------------BASIC NAIVE BAYES EMOTIONS------------------------')
-vectorizerBE = CountVectorizer()
-leBE = preprocessing.LabelEncoder()
-emotions_encoded= leBE.fit_transform(emotions)
-posts_encoded = vectorizerBE.fit_transform(posts)
-print("The length of the vocabulary is "+str(len(vectorizerBE.vocabulary_)) )
-X_trainBE, X_testBE, y_trainBE, y_testBE=train_test_split(posts_encoded,emotions_encoded, stratify=emotions_encoded, test_size=0.2, random_state=0)
-classifierBE= MultinomialNB()
-modelBE= classifierBE.fit(X_trainBE, y_trainBE)
-from sklearn.metrics import accuracy_score
-print("The accuracy of the basic Bayes model for emotions is " + str(accuracy_score(classifierBE.predict(X_testBE),y_testBE)))
-print('------------------------------------------------------------------')
+
 
 
 
