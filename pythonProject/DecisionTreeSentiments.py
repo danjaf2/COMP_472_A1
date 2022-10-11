@@ -36,8 +36,7 @@ for i in range(length):
 
 print('--------------Decision Tree Sentiments------------------------')
 vectorizerBE = CountVectorizer()
-leBE = preprocessing.LabelEncoder()
-sentiments_encoded= leBE.fit_transform(sentiments)
+sentiments_encoded= sentiments
 posts_encoded = vectorizerBE.fit_transform(posts)
 print("The length of the vocabulary is "+str(len(vectorizerBE.vocabulary_)) )
 X_trainBE, X_testBE, y_trainBE, y_testBE=train_test_split(posts_encoded,sentiments_encoded, stratify=sentiments_encoded, test_size=0.2, random_state=0)

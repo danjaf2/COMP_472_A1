@@ -60,8 +60,7 @@ for i in range(length):
 
 print('--------------BASIC NAIVE BAYES SENTIMENTS------------------------')
 vectorizer = CountVectorizer()
-le = preprocessing.LabelEncoder()
-sentiments_enconded= le.fit_transform(sentiments)
+sentiments_enconded= sentiments
 posts_encoded = vectorizer.fit_transform(posts)
 print("The length of the vocabulary is "+str(len(vectorizer.vocabulary_)) )
 X_train, X_test, y_train, y_test=train_test_split(posts_encoded,sentiments_enconded, stratify=sentiments_enconded, test_size=0.2, random_state=0)

@@ -35,9 +35,8 @@ for i in range(length):
 
 print('--------------BETTER PERFORMING DT------------------------')
 vectorizer = CountVectorizer()
-le = preprocessing.LabelEncoder()
-sentiments_encoded = le.fit_transform(sentiments)
-emotions_encoded = le.fit_transform(emotions)
+sentiments_encoded = sentiments
+emotions_encoded = emotions
 posts_encoded = vectorizer.fit_transform(posts)
 print("The length of the vocabulary is "+str(len(vectorizer.vocabulary_)))
 
@@ -45,8 +44,8 @@ print('--------------SENTIMENTS------------------------')
 X_trainS, X_testS, y_trainS, y_testS = train_test_split(posts_encoded, sentiments_encoded, stratify=sentiments_encoded, test_size=0.2, random_state=0)
 params = {
     'criterion': ['gini', 'entropy'],
-    'max_depth': [600, 800, 1000, ],
-    'min_samples_split': [2, 3, 4, 8, 10]
+    'max_depth': [400, 375],
+    'min_samples_split': [2, 3, 4]
 }
 model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params)
 model_grid.fit(X_trainS, y_trainS)
