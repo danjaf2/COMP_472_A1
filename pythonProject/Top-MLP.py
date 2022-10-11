@@ -48,7 +48,7 @@ params = {
     'solver': ['adam', 'sgd'],
     'hidden_layer_sizes': [(30, 50), (10,10,10)]
 }
-model_grid = GridSearchCV(estimator=MLPClassifier(max_iter=50), param_grid=params)
+model_grid = GridSearchCV(estimator=MLPClassifier(), param_grid=params)
 model_grid.fit(X_trainS, y_trainS)
 print("The accuracy of the better performing Decision Tree model for sentiments is " + str(accuracy_score(model_grid.predict(X_testS), y_testS)*100))
 print(model_grid.best_params_)
