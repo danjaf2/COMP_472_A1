@@ -35,7 +35,7 @@ for i in range(length):
     sentiments[i]= fullData[i][2]
 
 print('--------------Decision Tree Emotions------------------------')
-vectorizerBE = CountVectorizer()
+vectorizerBE = CountVectorizer(stop_words='english')
 leBE = preprocessing.LabelEncoder()
 emotions_encoded= emotions
 posts_encoded = vectorizerBE.fit_transform(posts)

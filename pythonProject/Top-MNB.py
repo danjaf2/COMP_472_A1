@@ -34,7 +34,7 @@ for i in range(length):
 
 
 print('--------------BETTER PERFORMING MNB------------------------')
-vectorizer = CountVectorizer()
+vectorizer = CountVectorizer(stop_words='english')
 sentiments_encoded = sentiments
 emotions_encoded = emotions
 posts_encoded = vectorizer.fit_transform(posts)

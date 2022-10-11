@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib
 from sklearn import preprocessing
 import numpy as np
-from sklearn.linear_model import Perceptron
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_auc_score
 matplotlib.use('TkAgg')
@@ -61,11 +61,11 @@ for i in range(length):
 #Basic Naive Bayes
 
 print('--------------BASIC NAIVE BAYES SENTIMENTS------------------------')
-vectorizer = CountVectorizer()
+vectorizer = CountVectorizer(stop_words='english')
 posts_encoded = vectorizer.fit_transform(posts)
 print("The length of the vocabulary is "+str(len(vectorizer.vocabulary_)) )
 X_train, X_test, y_train, y_test=train_test_split(posts_encoded,emotions, stratify=emotions, test_size=0.2, random_state=0)
-classifier= Perceptron()
+classifier= MLPClassifier()
 modelBE= classifier.fit(X_train, y_train)
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 predictions = classifier.predict(X_test)

@@ -5,7 +5,8 @@ import numpy as np
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
 import matplotlib
 from sklearn import preprocessing
 from sklearn.metrics import accuracy_score
@@ -43,11 +44,11 @@ print("The length of the vocabulary is "+str(len(vectorizer.vocabulary_)))
 print('--------------SENTIMENTS------------------------')
 X_trainS, X_testS, y_trainS, y_testS = train_test_split(posts_encoded, sentiments_encoded, stratify=sentiments_encoded, test_size=0.2, random_state=0)
 params = {
-    'criterion': ['gini', 'entropy'],
-    'max_depth': [400, 375],
-    'min_samples_split': [2, 3, 4]
+    'activation': ['identity', 'logistic', 'tanh', 'relu'],
+    'solver': ['adam', 'sgd'],
+    'hidden_layer_sizes': [(30, 50), (10,10,10)]
 }
-model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params)
+model_grid = GridSearchCV(estimator=MLPClassifier(max_iter=50), param_grid=params)
 model_grid.fit(X_trainS, y_trainS)
 print("The accuracy of the better performing Decision Tree model for sentiments is " + str(accuracy_score(model_grid.predict(X_testS), y_testS)*100))
 print(model_grid.best_params_)

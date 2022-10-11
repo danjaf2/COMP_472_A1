@@ -32,7 +32,7 @@ for i in range(length):
     sentiments[i]= fullData[i][2]
 
 print('--------------BASIC NAIVE BAYES EMOTIONS------------------------')
-vectorizerBE = CountVectorizer()
+vectorizerBE = CountVectorizer(stop_words='english')
 emotions_encoded= emotions
 posts_encoded = vectorizerBE.fit_transform(posts)
 print("The length of the vocabulary is "+str(len(vectorizerBE.vocabulary_)) )
