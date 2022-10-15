@@ -56,9 +56,9 @@ print(model_grid.best_params_)
 # print('--------------EMOTIONS------------------------')
 # X_trainE, X_testE, y_trainE, y_testE = train_test_split(posts_encoded, emotions_encoded, stratify=emotions_encoded, test_size=0.2, random_state=0)
 # params = {
-#     'criterion': ['gini', 'entropy'],
-#     'max_depth': [6, 8],
-#     'min_samples_split': [2, 4, 6]
+#     'activation': ['identity', 'logistic', 'tanh', 'relu'],
+#     'solver': ['adam', 'sgd'],
+#     'hidden_layer_sizes': [(30, 50), (10,10,10)]
 # }
 # model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params)
 # model_grid.fit(X_trainE, y_trainE)

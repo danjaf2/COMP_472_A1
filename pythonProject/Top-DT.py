@@ -41,16 +41,20 @@ posts_encoded = vectorizer.fit_transform(posts)
 print("The length of the vocabulary is "+str(len(vectorizer.vocabulary_)))
 
 print('--------------SENTIMENTS------------------------')
-X_trainS, X_testS, y_trainS, y_testS = train_test_split(posts_encoded, sentiments_encoded, stratify=sentiments_encoded, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(posts_encoded, sentiments_encoded, stratify=sentiments_encoded, test_size=0.2, random_state=0)
 params = {
     'criterion': ['gini', 'entropy'],
-    'max_depth': [400, 375],
-    'min_samples_split': [2, 3, 4]
+    'max_depth': [3,10,15,20,25, 30, 35,40,50,55,60],
+    'min_samples_split': [2, 3, 4,8,10]
 }
-model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params)
-model_grid.fit(X_trainS, y_trainS)
-print("The accuracy of the better performing Decision Tree model for sentiments is " + str(accuracy_score(model_grid.predict(X_testS), y_testS)*100))
-print(model_grid.best_params_)
+model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params, n_jobs=-1)
+model_grid.fit(X_train, y_train)
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+predictions = model_grid.predict(X_test)
+print(model_grid.best_estimator_)
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test,predictions))
+print(accuracy_score(y_test, predictions))
 
 # print('--------------EMOTIONS------------------------')
 # X_trainE, X_testE, y_trainE, y_testE = train_test_split(posts_encoded, emotions_encoded, stratify=emotions_encoded, test_size=0.2, random_state=0)

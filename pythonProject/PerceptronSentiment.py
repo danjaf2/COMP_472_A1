@@ -66,7 +66,7 @@ sentiments_enconded= sentiments
 posts_encoded = vectorizer.fit_transform(posts)
 print("The length of the vocabulary is "+str(len(vectorizer.vocabulary_)) )
 X_train, X_test, y_train, y_test=train_test_split(posts_encoded,sentiments_enconded, stratify=sentiments_enconded, test_size=0.2, random_state=0)
-classifier= MLPClassifier()
+classifier= MLPClassifier(max_iter=300)
 modelBE= classifier.fit(X_train, y_train)
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 predictions = classifier.predict(X_test)
