@@ -59,14 +59,14 @@ for i in range(length):
 
 print('--------------Word2Vec EMBEDDINGS Base MLP Sentiments------------------------')
 vectorizer = CountVectorizer(stop_words='english')
-sentiments_enconded= sentiments
+emotion_enconded= emotions
 posts_encoded =[None]*(len(posts))
 for i in range (len(posts)):
     posts_encoded[i] = word_tokenize(posts[i])
 
 
 
-X_train, X_test, y_train, y_test=train_test_split(posts_encoded,sentiments_enconded, stratify=sentiments_enconded, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test=train_test_split(posts_encoded,emotion_enconded, stratify=emotion_enconded, test_size=0.2, random_state=0)
 
 numberOfTokens =0;
 for i in range (len(X_train)):
