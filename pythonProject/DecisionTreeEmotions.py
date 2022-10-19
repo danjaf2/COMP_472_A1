@@ -36,6 +36,7 @@ for i in range(length):
 
 print('--------------Decision Tree Emotions------------------------')
 vectorizerBE = CountVectorizer(stop_words='english')
+print(vectorizerBE)
 leBE = preprocessing.LabelEncoder()
 emotions_encoded= emotions
 posts_encoded = vectorizerBE.fit_transform(posts)
@@ -43,5 +44,16 @@ print("The length of the vocabulary is "+str(len(vectorizerBE.vocabulary_)) )
 X_trainBE, X_testBE, y_trainBE, y_testBE=train_test_split(posts_encoded,emotions_encoded, stratify=emotions_encoded, test_size=0.2, random_state=42, shuffle=True)
 classifierBE= DecisionTreeClassifier()
 modelBE= classifierBE.fit(X_trainBE, y_trainBE)
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+predictions = classifierBE.predict(X_testBE)
+f = open("performance.txt", "a")
+f.write("Decision Tree Emotions Confusion Matrix")
+f.write("\n")
+f.write(str(confusion_matrix(y_testBE,predictions)))
+f.write("\n")
+f.write(str(classification_report(y_testBE,predictions)))
+f.write("\n")
+f.close()
+
 print("The accuracy of the basic Decision Tree is " + str(accuracy_score(classifierBE.predict(X_testBE),y_testBE)*100))
 print('------------------------------------------------------------------')

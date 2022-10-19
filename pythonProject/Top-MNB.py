@@ -46,9 +46,23 @@ params = [
 {'alpha': [0,0.5,3/4,0.8]}
 ]
 
-
-model_grid = GridSearchCV(estimator=MultinomialNB(), param_grid=params)
+model_grid = GridSearchCV(estimator=MultinomialNB(), param_grid=params, n_jobs=-1)
 model_grid.fit(X_trainS, y_trainS)
+
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+predictions = model_grid.predict(X_testS)
+f = open("performance.txt", "a")
+f.write("TOP Bayes Sentiment Confusion Matrix")
+f.write("\n")
+f.write(str(confusion_matrix(y_testS,predictions)))
+f.write("\n")
+f.write(str(classification_report(y_testS,predictions)))
+f.write("\n")
+f.write("Best Estimator: "+str(model_grid.best_params_))
+f.write("\n")
+f.write("\n")
+f.close()
+
 print("The accuracy of the better performing Multinomial Naive Bayes Classifier model for sentiments is " + str(accuracy_score(model_grid.predict(X_testS), y_testS)*100))
 print(model_grid.best_estimator_)
 print('--------------EMOTIONS------------------------')
@@ -56,8 +70,22 @@ X_trainE, X_testE, y_trainE, y_testE = train_test_split(posts_encoded, emotions_
 params = {
     'alpha': [0, 0.5,0.45,0.5145]
 }
-model_grid = GridSearchCV(estimator=MultinomialNB(), param_grid=params)
+model_grid = GridSearchCV(estimator=MultinomialNB(), param_grid=params, n_jobs=-1)
 model_grid.fit(X_trainE, y_trainE)
+
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+predictions = model_grid.predict(X_testE)
+f = open("performance.txt", "a")
+f.write("TOP Bayes Emotions Confusion Matrix")
+f.write("\n")
+f.write(str(confusion_matrix(y_testE,predictions)))
+f.write("\n")
+f.write(str(classification_report(y_testE,predictions)))
+f.write("\n")
+f.write("Best Estimator: "+str(model_grid.best_params_))
+f.write("\n")
+f.close()
+
 print("The accuracy of the better performing Multinomial Naive Bayes Classifier model for emotions is " + str(accuracy_score(model_grid.predict(X_testE), y_testE)*100))
 print(model_grid.best_estimator_)
 print('------------------------------------------------------------------')
