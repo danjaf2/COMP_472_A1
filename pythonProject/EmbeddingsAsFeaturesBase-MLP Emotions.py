@@ -25,15 +25,7 @@ import nltk
 from gensim.models import Word2Vec
 from gensim.models import KeyedVectors
 #nltk.download('punkt')
-def addMatrix(X, Y):
 
-    result=np.zeros_like(X)
-    for i in range(len(X)):
-            print(X[0])
-            for j in range(len(X[0])):
-                result[i][j] = X[i][j] + Y[i][j]
-
-    return result
 
 
 

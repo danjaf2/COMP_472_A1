@@ -24,16 +24,13 @@ from nltk.tokenize import word_tokenize
 import nltk
 from gensim.models import Word2Vec
 from gensim.models import KeyedVectors
-#nltk.download('punkt')
-def addMatrix(X, Y):
 
-    result=np.zeros_like(X)
-    for i in range(len(X)):
-            print(X[0])
-            for j in range(len(X[0])):
-                result[i][j] = X[i][j] + Y[i][j]
 
-    return result
+
+#nltk.download('punkt') RUN THIS ONCE ON FIRST STARTUP
+
+
+
 
 
 
@@ -85,8 +82,8 @@ print(numberOfTokensTest)
 
 
 X_train_final= []
-counter=0
-numberOfHitsTraining=0
+counter=0 #valid counter of embeddings that exist in that current sentence
+numberOfHitsTraining=0 #valid counter of embeddings that exist in training
 for arr in X_train:
     posts_encoded_sum =[]
     loop=0
