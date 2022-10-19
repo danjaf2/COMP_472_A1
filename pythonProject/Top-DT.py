@@ -44,26 +44,52 @@ print('--------------SENTIMENTS------------------------')
 X_train, X_test, y_train, y_test = train_test_split(posts_encoded, sentiments_encoded, stratify=sentiments_encoded, test_size=0.2, random_state=0)
 params = {
     'criterion': ['gini', 'entropy'],
-    'max_depth': [3,10,15,20,25, 30, 35,40,50,55,60],
-    'min_samples_split': [2, 3, 4,8,10]
+    'max_depth': [30,60],
+    'min_samples_split': [2, 4,8]
 }
 model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params, n_jobs=-1)
 model_grid.fit(X_train, y_train)
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 predictions = model_grid.predict(X_test)
+
+f = open("performance.txt", "a")
+f.write("TOP Decision Tree Setiments Confusion Matrix")
+f.write("\n")
+f.write(str(confusion_matrix(y_test,predictions)))
+f.write("\n")
+f.write(str(classification_report(y_test,predictions)))
+f.write("\n")
+f.write("Best Estimator: "+str(model_grid.best_params_))
+f.write("\n")
+f.write("\n")
+f.close()
+
 print(model_grid.best_estimator_)
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
 print(accuracy_score(y_test, predictions))
 
-# print('--------------EMOTIONS------------------------')
-# X_trainE, X_testE, y_trainE, y_testE = train_test_split(posts_encoded, emotions_encoded, stratify=emotions_encoded, test_size=0.2, random_state=0)
-# params = {
-#     'criterion': ['gini', 'entropy'],
-#     'max_depth': [6, 8],
-#     'min_samples_split': [2, 4, 6]
-# }
-# model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params)
-# model_grid.fit(X_trainE, y_trainE)
-# print("The accuracy of the better performing Decision Tree model for emotions is " + str(accuracy_score(model_grid.predict(X_testE), y_testE)*100))
-# print('------------------------------------------------------------------')
+print('--------------EMOTIONS------------------------')
+X_trainE, X_testE, y_trainE, y_testE = train_test_split(posts_encoded, emotions_encoded, stratify=emotions_encoded, test_size=0.2, random_state=0)
+params = {
+ 'criterion': ['gini', 'entropy'],
+ 'max_depth': [6, 8],
+ 'min_samples_split': [2, 4, 6]
+}
+model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params, n_jobs = -1)
+model_grid.fit(X_trainE, y_trainE)
+
+predictions = model_grid.predict(X_testE)
+f = open("performance.txt", "a")
+f.write("TOP Decision Tree Emotions Confusion Matrix")
+f.write("\n")
+f.write(str(confusion_matrix(y_testE,predictions)))
+f.write("\n")
+f.write(str(classification_report(y_testE,predictions)))
+f.write("\n")
+f.write("Best Estimator: "+str(model_grid.best_params_))
+f.write("\n")
+f.close()
+
+print("The accuracy of the better performing Decision Tree model for emotions is " + str(accuracy_score(model_grid.predict(X_testE), y_testE)*100))
+print('------------------------------------------------------------------')

@@ -38,7 +38,7 @@ for i in range(length):
     sentiments[i]= fullData[i][2]
 
 
-# distribution= [sentiments.count('positive')/length*100, sentiments.count('neutral')/length*100, sentiments.count('neutral')/length*100, sentiments.count('ambiguous')/length*100]
+# distribution= [sentiments.count('positive')/length*100, sentiments.count('neutral')/length*100, sentiments.count('negative')/length*100, sentiments.count('ambiguous')/length*100]
 # labels = 'Positive', 'Neutral', 'Negative', 'Ambiguous'
 # explode = (0, 0.1, 0,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
 #
@@ -69,6 +69,14 @@ classifier= MultinomialNB()
 modelBE= classifier.fit(X_train, y_train)
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 predictions = classifier.predict(X_test)
+f = open("performance.txt", "a")
+f.write("Bayes Setiments Confusion Matrix")
+f.write("\n")
+f.write(str(confusion_matrix(y_test,predictions)))
+f.write("\n")
+f.write(str(classification_report(y_test,predictions)))
+f.write("\n")
+f.close()
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
 print(accuracy_score(y_test, predictions))
