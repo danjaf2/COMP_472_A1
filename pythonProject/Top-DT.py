@@ -73,8 +73,8 @@ print('--------------EMOTIONS------------------------')
 X_trainE, X_testE, y_trainE, y_testE = train_test_split(posts_encoded, emotions_encoded, stratify=emotions_encoded, test_size=0.2, random_state=0)
 params = {
  'criterion': ['gini', 'entropy'],
- 'max_depth': [6, 8],
- 'min_samples_split': [2, 4, 6]
+ 'max_depth': [30, 60],
+ 'min_samples_split': [2, 4, 8]
 }
 model_grid = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=params, n_jobs = -1)
 model_grid.fit(X_trainE, y_trainE)
