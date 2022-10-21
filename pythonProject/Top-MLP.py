@@ -36,7 +36,7 @@ for i in range(length):
 
 
 print('--------------BETTER PERFORMING MLP------------------------')
-vectorizer = CountVectorizer(stop_words='english')
+vectorizer = CountVectorizer()
 sentiments_encoded = sentiments
 emotions_encoded = emotions
 posts_encoded = vectorizer.fit_transform(posts)
@@ -58,7 +58,7 @@ print("The accuracy of the better performing Decision Tree model for sentiments 
 print(model_grid.best_params_)
 
 predictions = model_grid.predict(X_testS)
-f = open("performance.txt", "a")
+f = open("performance_NoStopWords.txt", "a")
 f.write("TOP MLPerceptron Sentiment Confusion Matrix")
 f.write("\n")
 f.write(str(confusion_matrix(y_testS,predictions)))
@@ -81,7 +81,7 @@ model_grid = GridSearchCV(estimator=MLPClassifier(max_iter=10), param_grid=param
 model_grid.fit(X_trainE, y_trainE)
 
 predictions = model_grid.predict(X_testE)
-f = open("performance.txt", "a")
+f = open("performance_NoStopWords.txt", "a")
 f.write("TOP MLPerceptron Emotions Confusion Matrix")
 f.write("\n")
 f.write(str(confusion_matrix(y_testE,predictions)))
@@ -93,5 +93,5 @@ f.write("\n")
 f.write("\n")
 f.close()
 
-#print("The accuracy of the better performing Decision Tree model for emotions is " + str(accuracy_score(model_grid.predict(X_testE), y_testE)*100))
-#print('------------------------------------------------------------------')
+print("The accuracy of the better performing Decision Tree model for emotions is " + str(accuracy_score(model_grid.predict(X_testE), y_testE)*100))
+print('------------------------------------------------------------------')
