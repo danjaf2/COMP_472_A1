@@ -52,7 +52,6 @@ for i in range(length):
 
 
 
-#Basic Naive Bayes
 
 print('--------------Word2Vec EMBEDDINGS Base MLP Sentiments------------------------')
 vectorizer = CountVectorizer(stop_words='english')

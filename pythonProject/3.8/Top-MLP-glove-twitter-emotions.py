@@ -23,7 +23,7 @@ for i in range(length):
     posts[i] = fullData[i][0]
     sentiments[i] = fullData[i][2]
 
-print('--------------GloVe Twitter Embedding Top MLP Sentiments------------------------')
+print('--------------GloVe Twitter Embedding Top MLP Emotions------------------------')
 vectorizer = CountVectorizer(stop_words='english')
 emotions_encoded = emotions
 posts_encoded = [None] * (len(posts))

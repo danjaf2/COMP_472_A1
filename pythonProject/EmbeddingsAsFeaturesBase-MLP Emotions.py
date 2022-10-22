@@ -47,9 +47,8 @@ for i in range(length):
 
 
 
-#Basic Naive Bayes
 
-print('--------------Word2Vec EMBEDDINGS Base MLP Sentiments------------------------')
+print('--------------Word2Vec EMBEDDINGS Base MLP Emotions------------------------')
 vectorizer = CountVectorizer(stop_words='english')
 emotion_enconded= emotions
 posts_encoded =[None]*(len(posts))
