@@ -10,7 +10,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
 data = gsm.load('word2vec-google-news-300')
-with gzip.open("goemotions.json.gz", "rb") as f:
+with gzip.open("../goemotions.json.gz", "rb") as f:
     fullData = json.loads(f.read().decode("ascii"))
 
 length = len(fullData)

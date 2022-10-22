@@ -35,7 +35,7 @@ from gensim.models import KeyedVectors
 
 
 data = gsm.load('word2vec-google-news-300')
-with gzip.open("goemotions.json.gz", "rb") as f:
+with gzip.open("../goemotions.json.gz", "rb") as f:
     fullData = json.loads(f.read().decode("ascii"))
 
 length = len(fullData)

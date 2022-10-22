@@ -16,7 +16,7 @@ import math
 from collections import Counter
 from sklearn.model_selection import cross_validate
 
-with gzip.open("goemotions.json.gz", "rb") as f:
+with gzip.open("../goemotions.json.gz", "rb") as f:
     fullData = json.loads(f.read().decode("ascii"))
 
 
@@ -51,7 +51,7 @@ model_grid.fit(X_trainS, y_trainS)
 
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 predictions = model_grid.predict(X_testS)
-f = open("performance.txt", "a")
+f = open("../performance.txt", "a")
 f.write("TOP Bayes Sentiment Confusion Matrix")
 f.write("\n")
 f.write(str(confusion_matrix(y_testS,predictions)))
@@ -75,7 +75,7 @@ model_grid.fit(X_trainE, y_trainE)
 
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 predictions = model_grid.predict(X_testE)
-f = open("performance.txt", "a")
+f = open("../performance.txt", "a")
 f.write("TOP Bayes Emotions Confusion Matrix")
 f.write("\n")
 f.write(str(confusion_matrix(y_testE,predictions)))

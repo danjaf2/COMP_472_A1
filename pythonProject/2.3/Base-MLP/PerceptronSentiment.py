@@ -23,7 +23,7 @@ from nltk.corpus import stopwords
 
 
 
-with gzip.open("goemotions.json.gz", "rb") as f:
+with gzip.open("../../goemotions.json.gz", "rb") as f:
     fullData = json.loads(f.read().decode("ascii"))
 
 
@@ -70,7 +70,7 @@ classifier= MLPClassifier(max_iter=1)
 modelBE= classifier.fit(X_train, y_train)
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 predictions = classifier.predict(X_test)
-f = open("performance.txt", "a")
+f = open("../../performance.txt", "a")
 f.write("Perceptron Sentiments Confusion Matrix")
 f.write("\n")
 f.write(str(confusion_matrix(y_test,predictions)))
