@@ -1,0 +1,26 @@
+--------------Word2Vec EMBEDDINGS Base MLP Sentiments------------------------
+Number of tokens in training set:
+2115446
+Number of tokens in testing set:
+526682
+Hit rate percentage of training set is:
+77.07670155607849
+Hit rate percentage of training set is:
+77.05351616345347
+[[ 414  592 1891  905]
+ [ 105 3761 2527 1316]
+ [ 238 1767 6324 2731]
+ [ 118 1001 2509 8165]]
+              precision    recall  f1-score   support
+
+   ambiguous       0.47      0.11      0.18      3802
+    negative       0.53      0.49      0.51      7709
+     neutral       0.48      0.57      0.52     11060
+    positive       0.62      0.69      0.66     11793
+
+    accuracy                           0.54     34364
+   macro avg       0.53      0.47      0.47     34364
+weighted avg       0.54      0.54      0.53     34364
+
+0.543126527761611
+------------------------------------------------------------------
