@@ -1,13 +1,14 @@
 import json
 import gzip
-import gensim.downloader as gsm
-from sklearn.feature_extraction.text import CountVectorizer
-from nltk.tokenize import word_tokenize
-from sklearn.model_selection import train_test_split
+
 import numpy as np
-from sklearn.model_selection import GridSearchCV
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import gensim.downloader as gsm
+from nltk.tokenize import word_tokenize
+
 
 data = gsm.load('glove-twitter-200')
 with gzip.open("../goemotions.json.gz", "rb") as f:

@@ -1,20 +1,13 @@
-import json
 import gzip
-from pandas import DataFrame
-import numpy as np
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.model_selection import GridSearchCV
+import json
+
+import matplotlib
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split, GridSearchCV
-import matplotlib
-from sklearn import preprocessing
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import roc_auc_score
+from sklearn.naive_bayes import MultinomialNB
+
 matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt
-import math
-from collections import Counter
-from sklearn.model_selection import cross_validate
+
 
 with gzip.open("../goemotions.json.gz", "rb") as f:
     fullData = json.loads(f.read().decode("ascii"))

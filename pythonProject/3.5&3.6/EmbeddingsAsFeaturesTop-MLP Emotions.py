@@ -1,13 +1,13 @@
 import json
 import gzip
-import gensim.downloader as gsm
-from sklearn.feature_extraction.text import CountVectorizer
-from nltk.tokenize import word_tokenize
-from sklearn.model_selection import train_test_split
+
 import numpy as np
-from sklearn.model_selection import GridSearchCV
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import gensim.downloader as gsm
+from nltk.tokenize import word_tokenize
 
 data = gsm.load('word2vec-google-news-300')
 with gzip.open("../goemotions.json.gz", "rb") as f:
@@ -22,8 +22,6 @@ for i in range(length):
     emotions[i] = fullData[i][1]
     posts[i] = fullData[i][0]
     sentiments[i] = fullData[i][2]
-
-# Basic Naive Bayes
 
 print('--------------Word2Vec EMBEDDINGS Top MLP Emotions------------------------')
 vectorizer = CountVectorizer(stop_words='english')
